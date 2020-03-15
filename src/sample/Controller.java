@@ -76,8 +76,8 @@ public class Controller implements Initializable {
                 String word = slowo_tf.getText();
                 int key = Integer.parseInt(klucz_tf.getText());
 
-                String result = DeszyfrowanieRailFence(word.toCharArray(), key);
-                result2_label.setText(result);
+                char[] result = DeszyfrowanieRailFence(word.toCharArray(), key);
+                result2_label.setText(String.valueOf(result));
 
             } /*Deszyfrowanie metodą macierzową A*/ else if (radio_macierzeA.equals(selected)) {
 
@@ -147,9 +147,9 @@ public class Controller implements Initializable {
         return output;
     }
 
-    public static String DeszyfrowanieRailFence(char[] password, int key){
+    public static char[] DeszyfrowanieRailFence(char[] password, int key){
         char[][] szyfr = new char[key][password.length];
-        StringBuilder output = new StringBuilder(" ");
+        char[] output = new char[password.length];
         int new_key = 2*key - 2;
         int j = 0, height = -1, n=0;
 
@@ -174,15 +174,19 @@ public class Controller implements Initializable {
       j=0;
       height = -1;
 
-      for(int i=0;i<password.length;i++){
-          if(i%new_key == 0 || (i+key-1)%new_key == 0)
-              height *= -1;
+        for(int i=0;i<password.length;i++){
+             output[i] =szyfr[abs(j)][i];
 
-          String abc = String.valueOf(szyfr[j][i]);
-          output.append(abc);
-      }
+            if(i%new_key == 0){
+                height *= 1;
+            }
+            if((i+key-1)%new_key == 0){
+                height *= -1;
+            }
+            j += height;
+        }
 
-        return output.toString();
+        return output;
     }
 
     public void randomButtonPressed(ActionEvent actionEvent) {
