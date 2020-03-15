@@ -24,8 +24,8 @@
                 <Label fx:id="slowo_label" layoutX="22.0" layoutY="88.0" prefHeight="25.0" prefWidth="39.0" text="Słowo" />
                 <Label fx:id="klucz_label" layoutX="22.0" layoutY="51.0" prefHeight="25.0" prefWidth="39.0" text="Klucz" />
                 <TextField fx:id="klucz_tf" layoutX="61.0" layoutY="51.0" />
-                <Button layoutX="61.0" layoutY="131.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Szyfruj" />
-                <Button layoutX="145.0" layoutY="131.0" mnemonicParsing="false" text="Deszyfruj" />
+                <Button layoutX="61.0" layoutY="131.0" mnemonicParsing="false" onAction="#szyfrujButtonClicked" prefHeight="25.0" prefWidth="65.0" text="Szyfruj" />
+                <Button layoutX="145.0" layoutY="131.0" mnemonicParsing="false" onAction="#deszyfrujButtonClicked" text="Deszyfruj" />
                 <VBox layoutX="265.0" layoutY="55.0" prefHeight="53.0" prefWidth="179.0" spacing="8.0">
                     <children>
                         <RadioButton fx:id="radio_railfence" mnemonicParsing="false" text="Rail Fence" />
@@ -33,9 +33,11 @@
                         <RadioButton fx:id="radio_macierzeB" mnemonicParsing="false" text="Przedstawienia Macierzowe B" />
                     </children>
                 </VBox>
-                <Button fx:id="end_button" layoutX="235.0" layoutY="295.0" mnemonicParsing="false" text="Zakończ" />
+                <Button fx:id="end_button" layoutX="235.0" layoutY="295.0" mnemonicParsing="false" onAction="#endButtonClicked" text="Zakończ" />
                 <Label fx:id="result_label" layoutX="22.0" layoutY="197.0" prefHeight="17.0" prefWidth="54.0" text="Wynik" />
                 <Label fx:id="result2_label" layoutX="22.0" layoutY="223.0" prefHeight="82.0" prefWidth="188.0" />
+            <Button fx:id="randomButton" layoutX="262.0" layoutY="131.0" mnemonicParsing="false" onAction="#randomButtonPressed" text="Wgraj losowe słowo z pliku *.txt" />
+            <Label fx:id="warning" layoutX="62.0" layoutY="26.0" prefHeight="17.0" prefWidth="308.0" />
             </children>
         </AnchorPane>
     </children>
