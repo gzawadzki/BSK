@@ -29,13 +29,27 @@ public class Controller implements Initializable {
     public Button end_button;
     public Button randomButton;
     public Label warning;
+    public RadioButton cezar;
 
     ToggleGroup toggleGroup = new ToggleGroup();
     String[] words;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        radio_railfence.setToggleGroup(toggleGroup);
+        radio_macierzeB.setToggleGroup(toggleGroup);
+        radio_macierzeA.setToggleGroup(toggleGroup);
+        cezar.setToggleGroup(toggleGroup);
+    }
+
     public void endButtonClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) end_button.getScene().getWindow();
         stage.close();
+    }
+
+    public void randomButtonPressed(ActionEvent actionEvent) {
+
     }
 
     public void szyfrujButtonClicked(ActionEvent actionEvent) {
@@ -57,7 +71,14 @@ public class Controller implements Initializable {
 
             } /*Szyfrowanie metodą macierzową B*/ else if (radio_macierzeB.equals(selected)) {
 
-            } else {
+            } /*Szyfr Cezara*/ else if(cezar.equals(selected)){
+                String word = slowo_tf.getText();
+                int key = Integer.parseInt(klucz_tf.getText());
+                String result = Cezar(word,key,0);
+
+                result2_label.setText(result);
+            }
+            else {
                 warning.setText("Wybierz metodę szyfrowania");
             }
 
@@ -83,21 +104,21 @@ public class Controller implements Initializable {
 
             } /*Deszyfrowanie metodą macierzową B*/ else if (radio_macierzeB.equals(selected)) {
 
-            } else {
+            } /*Deszyfrowanie Cezara*/ else if(cezar.equals(selected)){
+                String word = slowo_tf.getText();
+                int key = Integer.parseInt(klucz_tf.getText());
+                String result = Cezar(word,key,1);
+
+                result2_label.setText(result);
+            }
+            else {
                 warning.setText("Wybierz metodę deszyfrowania");
             }
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        radio_railfence.setToggleGroup(toggleGroup);
-        radio_macierzeB.setToggleGroup(toggleGroup);
-        radio_macierzeA.setToggleGroup(toggleGroup);
-
-    }
-
+    /* Rail fence poniżej */
     public static void init(char[][] tab, int height,int size){
 
         for(int y=0;y<height;y++){
@@ -189,6 +210,66 @@ public class Controller implements Initializable {
         return output;
     }
 
-    public void randomButtonPressed(ActionEvent actionEvent) {
+
+    /* Szyfr Cezara*/
+
+    public static String Cezar(String password, int key,int param){
+       StringBuilder sb = new StringBuilder();
+
+       switch (param){
+           case 0:
+               for(int i=0;i<password.length();i++){
+                   sb.append(szyfrujZnak(password.substring(i,i+1),key));
+               }
+               break;
+           case 1:
+               for(int i=0;i<password.length();i++){
+                   sb.append(deszyfrujZnak(password.substring(i,i+1),key));
+               }
+               break;
+       }
+
+        return sb.toString();
+    }
+
+    public static String szyfrujZnak(String s, int key){
+        int index = 0;
+        String[] alphabet = {"A","B", "C",  "D", "E",  "F", "G", "H", "I", "J",
+                "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+
+        for(int i=0;i<alphabet.length;i++){
+            if(s.equalsIgnoreCase(alphabet[i])) {
+                index = (i+key)%(alphabet.length);
+                break;
+            }
+            if(s.equals(" ") || s.equals(",")){
+                return s;
+            }
+        }
+
+        return alphabet[index];
+    }
+
+    public static String deszyfrujZnak(String s, int key){
+        int index = 0;
+        String[] alphabet = {"A","B", "C",  "D", "E",  "F", "G", "H", "I", "J",
+                "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+
+        for(int i=0;i<alphabet.length;i++){
+
+            if(s.equalsIgnoreCase(alphabet[i])) {
+                index = i - key;
+
+                if(index <0){
+                    index = alphabet.length + index;
+                }
+                break;
+            }
+            if(s.equals(" ") || s.equals(",")){
+                return s;
+            }
+        }
+
+        return alphabet[index];
     }
 }
