@@ -25,16 +25,16 @@
                 <Button fx:id="end_button" layoutX="305.0" layoutY="318.0" mnemonicParsing="false" onAction="#endButtonClicked" text="Zakończ" />
                 <Label fx:id="result_label" layoutX="46.0" layoutY="246.0" prefHeight="17.0" prefWidth="54.0" text="  Wynik:" />
                 <Label fx:id="result2_label" layoutX="100.0" layoutY="246.0" prefHeight="53.0" prefWidth="469.0" />
-            <Button fx:id="randomButton" layoutX="439.0" layoutY="76.0" mnemonicParsing="false" onAction="#randomButtonPressed" text="Wgraj losowe słowo z pliku *.txt" />
+            <Button fx:id="randomButton" layoutX="444.0" layoutY="76.0" mnemonicParsing="false" onAction="#randomButtonPressed" prefHeight="25.0" prefWidth="65.0" text="Losowo" />
             <Label fx:id="warning" layoutX="214.0" layoutY="14.0" prefHeight="17.0" prefWidth="303.0" />
             <HBox fx:id="HBox" layoutY="121.0" prefHeight="17.0" prefWidth="668.0" spacing="15.0">
                <children>
                         <RadioButton fx:id="radio_railfence" mnemonicParsing="false" text="Rail Fence" />
                         <RadioButton fx:id="radio_macierzeA" mnemonicParsing="false" text="Macierze A" />
                         <RadioButton fx:id="radio_macierzeB" mnemonicParsing="false" text="Macierze B" />
-                  <RadioButton fx:id="cezar11" mnemonicParsing="false" text="Macierze C" />
+                  <RadioButton fx:id="radio_macierzeC" mnemonicParsing="false" text="Macierze C" />
                   <RadioButton fx:id="cezar" mnemonicParsing="false" text="Szyfr Cezara" />
-                  <RadioButton fx:id="cezar1" mnemonicParsing="false" text="Szyfrowanie Vigener'a" />
+                  <RadioButton fx:id="radio_vigener" mnemonicParsing="false" text="Szyfrowanie Vigener'a" />
                </children>
                <padding>
                   <Insets left="25.0" right="20.0" />

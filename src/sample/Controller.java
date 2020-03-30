@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -19,20 +21,25 @@ public class Controller implements Initializable {
 
     public Label result_label;
     public Label result2_label;
+    public Label klucz_label;
+    public Label slowo_label;
+    public Label warning;
+
     public RadioButton radio_railfence;
     public RadioButton radio_macierzeA;
     public RadioButton radio_macierzeB;
+    public RadioButton cezar;
+    public RadioButton radio_macierzeC;
+    public RadioButton radio_vigener;
+
     public TextField klucz_tf;
-    public Label klucz_label;
-    public Label slowo_label;
     public TextField slowo_tf;
+
     public Button end_button;
     public Button randomButton;
-    public Label warning;
-    public RadioButton cezar;
 
     ToggleGroup toggleGroup = new ToggleGroup();
-    String[] words;
+    ArrayList<String> words;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,7 +47,22 @@ public class Controller implements Initializable {
         radio_railfence.setToggleGroup(toggleGroup);
         radio_macierzeB.setToggleGroup(toggleGroup);
         radio_macierzeA.setToggleGroup(toggleGroup);
+        radio_macierzeC.setToggleGroup(toggleGroup);
         cezar.setToggleGroup(toggleGroup);
+        radio_vigener.setToggleGroup(toggleGroup);
+
+        words = new ArrayList<>();
+        File file = new File("src/sample/words.txt");
+        try {
+            Scanner in = new Scanner(file);
+            while(in.hasNext()){
+                words.add(in.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        }
+
     }
 
     public void endButtonClicked(ActionEvent actionEvent) {
@@ -49,7 +71,10 @@ public class Controller implements Initializable {
     }
 
     public void randomButtonPressed(ActionEvent actionEvent) {
+            Random variable = new Random();
+            int k = variable.nextInt(words.size());
 
+            slowo_tf.setText(words.get(k));
     }
 
     public void szyfrujButtonClicked(ActionEvent actionEvent) {
@@ -77,6 +102,10 @@ public class Controller implements Initializable {
                 String result = Cezar(word,key,0);
 
                 result2_label.setText(result);
+            } /*Szyfrowanie metodą macierzową C*/ else if(radio_macierzeC.equals(selected)){
+
+            } /*Szyfrowanie Vigenere'a*/ else if(radio_vigener.equals(selected)){
+
             }
             else {
                 warning.setText("Wybierz metodę szyfrowania");
@@ -110,6 +139,10 @@ public class Controller implements Initializable {
                 String result = Cezar(word,key,1);
 
                 result2_label.setText(result);
+            } /*Deszyfrowanie metodą macierzową C*/ else if(radio_macierzeC.equals(selected)) {
+
+            } /*Deszyfrowanie metodą vigener'a*/ else if(radio_vigener.equals(selected)){
+
             }
             else {
                 warning.setText("Wybierz metodę deszyfrowania");

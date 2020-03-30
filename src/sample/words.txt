@@ -5,3 +5,6 @@ czolg
 tank
 paliwo
 umcaumca
+ala ma kota
+nie wiem co napisac
+proste zdanie do testu
