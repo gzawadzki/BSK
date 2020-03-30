@@ -46,7 +46,7 @@
                       <Button mnemonicParsing="false" onAction="#deszyfrujButtonClicked" text="Deszyfruj" />
                </children>
             </HBox>
-            <HBox layoutX="194.0" layoutY="43.0" prefHeight="66.0" prefWidth="282.0">
+            <HBox layoutX="194.0" layoutY="43.0" prefHeight="66.0" prefWidth="248.0">
                <children>
                   <HBox prefHeight="64.0" prefWidth="254.0">
                      <children>
