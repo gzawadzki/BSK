@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.awt.event.KeyAdapter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import static java.lang.StrictMath.abs;
 import static javafx.scene.paint.Color.RED;
@@ -93,6 +95,11 @@ public class Controller implements Initializable {
                 result2_label.setText(String.valueOf(output));
 
             } /*Szyfrowanie metodą macierzową A*/ else if (radio_macierzeA.equals(selected)) {
+                String word= slowo_tf.getText();
+                String key= String.valueOf((klucz_tf.getText()));
+                String result = SzyfrowanieMacierzoweA(word,key);
+                result2_label.setText(result);
+
 
             } /*Szyfrowanie metodą macierzową B*/ else if (radio_macierzeB.equals(selected)) {
 
@@ -175,6 +182,38 @@ public class Controller implements Initializable {
 
         return output;
     }
+    public static String SzyfrowanieMacierzoweA(String password,String key) {
+
+        int[] keyArr = Stream.of(key.replaceAll("-", "").split("")).mapToInt(Integer::parseInt).toArray();
+        double cols = keyArr.length;
+        int i = 0;
+        int j = 0;
+        char[] e;
+        e = password.toCharArray();
+        double rows = Math.ceil(password.length() / cols);
+        char[][] cipher = new char[(int) rows][(int) cols];
+        init(cipher, (int) rows, (int) cols);
+        for (i = 0; i < e.length; i++) {
+            cipher[j][(int) (i % rows)] = e[i];
+            if (i % cols == cols - 1) {
+                j++;
+            }
+        }
+        StringBuilder answer = new StringBuilder();
+        for (i = 0; i < rows; i++) {
+            for (int k : keyArr) {
+                char next = cipher[i][k - 1];
+                if (next != '0') {
+                    answer.append(cipher[i][k - 1]);
+                }
+
+            }
+        }
+            return answer.toString();
+    }
+
+
+
 
     public static char[] SzyfrowanieRailFence(char[] password, int key){
         char[][] szyfr = new char[key][password.length];
